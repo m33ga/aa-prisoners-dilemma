@@ -15,7 +15,7 @@ def strategy(my_history, opponent_history, my_score, opponent_score):
     toxic = is_toxic(opponent_history)
 
     if toxic:
-        if round_num >= 66:
+        if round_num >= 51:
             return 0
         elif is_fibonacci(round_num):
             return 0
