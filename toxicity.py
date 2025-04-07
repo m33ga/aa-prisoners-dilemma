@@ -27,7 +27,7 @@ def strategy(my_history, opponent_history, rounds=None):
             return 1
     else:
         if opponent_history[-1] == 0:
-            if round_num % 4 == 0:
+            if round_num % 7 == 0:
                 return 1
             else:
                 return 0

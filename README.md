@@ -13,7 +13,7 @@ Inspired by the album Toxicity
   - Escalates into full defection mode after round 51 (album duration).
 - Against **non-toxic opponents**:
   - Plays a gentle **tit-for-tat**.
-  - Forgives betrayals every 4 rounds.
+  - Forgives betrayals every 7 rounds.
 
     
 ---
