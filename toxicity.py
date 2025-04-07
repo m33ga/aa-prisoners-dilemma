@@ -1,4 +1,4 @@
-def strategy(my_history, opponent_history, my_score, opponent_score):
+def strategy(my_history, opponent_history, rounds=None):
     round_num = len(my_history)
     def is_toxic(opponent_history):
         return opponent_history[:5].count(0) >= 3
