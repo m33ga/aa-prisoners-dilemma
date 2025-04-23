@@ -8,6 +8,11 @@ def strategy_round_2(opponent_id: int, my_history: dict[int, list[int]], opponen
             a, b = b, a + b
         return b == n
 
+    def looks_random(history):
+        if len(history) < 5:
+            return False
+        return 0 in history[:5] and 1 in history[:5]
+
     current_round = len(my_history.get(opponent_id, []))
     opp_hist = opponents_history.get(opponent_id, [])
     toxic = is_toxic(opp_hist)
@@ -34,15 +39,22 @@ def strategy_round_2(opponent_id: int, my_history: dict[int, list[int]], opponen
         else:
             move = 1
 
-    candidates = []
-    for pid in opponents_history:
-        if len(my_history.get(pid, [])) < 200:
-            coop_score = opponents_history[pid].count(1)
-            candidates.append((coop_score, -len(my_history.get(pid, [])), pid))
-    if candidates:
-        next_opponent = max(candidates)[2]
-    else:
-        next_opponent = opponent_id
+    # selection criteria
+    best_score = -1
+    next_opponent = opponent_id  # default
+    for pid, history in opponents_history.items():
+        if len(my_history.get(pid, [])) >= 200:
+            continue
+        score = 0
+        if is_toxic(history):
+            score += 3
+        if looks_random(history):
+            score += 2
+        if len(my_history.get(pid, [])) == 0:
+            score += 1  # curiosity bonus point
+
+        if score > best_score:
+            best_score = score
+            next_opponent = pid
 
     return move, next_opponent
-
